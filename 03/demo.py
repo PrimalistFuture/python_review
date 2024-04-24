@@ -275,6 +275,30 @@ else:
     print(f"Your score is {total_love_and_true}.")
 
 
+# True Love Refactor
+
+def letter_sum(string, chars):
+    """Takes in a string and string of characters. Searches through the string for any of the input chars, and returns the total number of chars within the input string.
+
+    str = "vaughn"
+    chars = "ah"
+    returns: 2
+    """
+    string = string.lower()
+    total = 0
+    for letter in range(len(string)):
+        for char in range(len(chars)):
+            if string[letter] == chars[char]:
+                total += 1
+    return total
+
+true_total = letter_sum(name1 + name2, 'true')
+love_total = letter_sum(name1 + name2, 'love')
+print(str(true_total) + str(love_total))
+
+
+
+
 # Treasure Island!
 print("Welcome to Treasure Island.")
 print("Your mission is to find the treasure.")
