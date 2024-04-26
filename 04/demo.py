@@ -31,19 +31,19 @@ payer_idx = random.randint(0, len(names)-1)
 print(f"{names[payer_idx]} is going to buy the meal today!")
 
 # Treasure Hunt
-line1 = ["O","O","O"]
-line2 = ["O","O","O"]
-line3 = ["O","O","O"]
+line1 = [" "," "," "]
+line2 = [" "," "," "]
+line3 = [" "," "," "]
 map = [line1, line2, line3]
 position = input()
 letter = position[0].lower()
 abc = ["a", "b", "c"]
 letter_index = abc.index(letter)
 number_index = int(position[1]) - 1
-map[number_index][letter] = "X"
+map[number_index][letter_index] = "X"
 
 # Rock Paper Scissors
-player_choice_idx = input("What do you choose? Type 0 for Rock, 1 for Paper, or 2 for Scissors.\n")
+player_choice_idx = int(input("What do you choose? Type 0 for Rock, 1 for Paper, or 2 for Scissors.\n"))
 
 rps = ["Rock", "Paper", "Scissors"]
 player_choice = rps[player_choice_idx]
