@@ -31,6 +31,7 @@ def start_game():
 
 def handle_scoring(hand):
     """Takes in a hand list, and returns the score, using the lower value of aces '1' if the score is over 21."""
+    # TODO: handle aces better. Right now only checks to use the lower value if the total is over 21 and the current card is an ace, which isn't nearly as often as it should.
     total = 0
     for card in hand:
         if card == 11 and total > 21:
