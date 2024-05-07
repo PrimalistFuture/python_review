@@ -23,7 +23,7 @@ def start_game():
     print(f"The dealer's hand is {dealer['hand']}.")
 
     player["score"] = handle_scoring(player["hand"])
-    dealer["score"] = handle_scoring(player["hand"])
+    dealer["score"] = handle_scoring(dealer["hand"])
     print(f"Your score is {player['score']}.")
     print(f"The dealer's score is {dealer['score']}.")
 
@@ -45,11 +45,13 @@ def determine_bust(gamblers):
     for gambler in gamblers:
         if gambler["name"] == "player" and gambler["score"] > target_score:
             gambler["bust"] = True
-            return f"{gambler['name']} has busted."
+            # return f"{gambler['name']} has busted."
+            return True
         elif gambler["name"] == "dealer" and gambler["score"] > target_score:
             gambler["bust"] = True
-            return f"{gambler['name']} has busted."
-    return gamblers
+            # return f"{gambler['name']} has busted."
+            return True
+    return False
 
 
 def draw_cards_and_add_to_hand(gambler_dict, cards_to_draw):
@@ -57,7 +59,6 @@ def draw_cards_and_add_to_hand(gambler_dict, cards_to_draw):
     Returns the dictionary with the updated hand"""
     cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
     drawn_cards = random.sample(cards, cards_to_draw)
-    # check this
     hand = gambler_dict["hand"]
     for card in drawn_cards:
         hand.append(card) 
@@ -73,26 +74,59 @@ def determine_winner_on_score(gamblers):
             high_score = gambler["score"]
         elif gambler["score"] == high_score:
             tied = True
-    if tied == True:
+    if tied is True:
         return f"The game is tied."
     else:
         for gambler in gamblers:
             if gambler["score"] == high_score:
                 gambler["winner"] = True
-        return f"{gambler['name']} is the winner with a score of {gambler['score']}"
-    
+                return f"{gambler['name']} is the winner with a score of {gambler['score']}"
+        
 
 def direct_game():
     """Main function controlling the flow of blackjack"""
     player, dealer = start_game()
 
-    while player["bust"] is False and dealer["bust"] is False:
-        response = input("Would you like to hit? Type 'y' for yes, or 'n' to stand.")
-        if response == 'y':
+    response = input("Would you like to hit? Type 'y' for yes, or 'n' to stand.")
+    if response == 'y':
+        while (player["bust"] is False and dealer["bust"] is False) and response == 'y':
+            # Player flow
             draw_cards_and_add_to_hand(player, 1)
             print(f"Your hand is {player['hand']}.")
             player["score"] = handle_scoring(player["hand"])
             print(f"Your score is {player['score']}.")
-            determine_bust(player)
+            # Check bust
+            isBust = determine_bust([player])
+            if isBust:
+                print(f"{dealer['name']} busts and the player is the winner.")
+                return 
+            # Dealer hits if their score is less than player
+            if dealer["score"] < player["score"]:
+                draw_cards_and_add_to_hand(dealer, 1)
+                print(f"The dealer's hand is {dealer['hand']}.")
+                dealer["score"] = handle_scoring(dealer["hand"])
+                print(f"The dealer's score is {dealer['score']}.")
+            # Check bust on dealer
+            isBust = determine_bust([dealer])
+            if isBust:
+                print(f"{dealer['name']} busts and the player is the winner.")
+                return 
+            # hit again?
+            response = input("Would you like to hit? Type 'y' for yes, or 'n' to stand.")
+    if response == 'n':
+        while dealer["score"] < player["score"]:
+            # dealer hits if score is less than player
+            if dealer["score"] < player["score"]:
+                draw_cards_and_add_to_hand(dealer, 1)
+                print(f"The dealer's hand is {dealer['hand']}.")
+                dealer["score"] = handle_scoring(dealer["hand"])
+                print(f"The dealer's score is {dealer['score']}.")
+            # Check bust on dealer
+            isBust = determine_bust([dealer])
+            if isBust:
+                print(f"{dealer['name']} busts and the player is the winner.")
+                return
+    winner = determine_winner_on_score([player, dealer])
+    print(winner) 
 
 direct_game()
