@@ -63,17 +63,21 @@ def game():
             "Who has more instragram followers? Type 'a' or 'b'. ")
         # Ends the game on wrong choice
         if user_choice is not more_followers:
-            print(f"""Thats incorrect! {a['name']} has {a['follower_count']} followers, and {
-                  b['name']} has {b['follower_count']} followers.""")
+            print(f"""Thats incorrect!
+                  {a['name']} has {a['follower_count']} followers, and
+                  {b['name']} has {b['follower_count']} followers.""")
             game_over = True
             print(f"You have lost with a score of {score}.")
         else:
-            print(f"""Thats correct! {a['name']} has {a['follower_count']} followers, and {
-                  b['name']} has {b['follower_count']} followers.""")
+            print(f"""Thats correct!
+                  {a['name']} has {a['follower_count']} followers, and
+                  {b['name']} has {b['follower_count']} followers.""")
             score += 1
             print(f"You have a score of {score}.")
-            # Keeps the winning dict and reset loser variable to fetch a new dict back at the top
-            # While we already know who the winner is, they are currently just a string. Probably a sharper way...
+            # Keeps the winning dict and reset loser variable
+            # to fetch a new dict back at the top
+            # While we already know who the winner is,
+            # they are currently just a string. Probably a sharper way...
             keep_winner = determine_winner(a, b, False)
             if keep_winner == a:
                 b = ""
