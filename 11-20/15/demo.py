@@ -47,14 +47,13 @@ def recieves_and_updates_money(drink):
 
 def handle_resources(drink):
     """Helper function for check_and_update_resources"""
-    drink_resources = data.MENU[drink]["ingredients"]
     for resource in data.resources:
-        if resource not in drink_resources:
+        if resource not in data.MENU[drink]["ingredients"]:
             continue
-        if data.resources[resource] - drink_resources[resource] < 0:
+        if data.resources[resource] - data.MENU[drink]["ingredients"][resource] < 0:
             return f"Sorry insuffiecient resources for {drink} due to lack of {resource}."
         else:
-            data.resources[resource] -= drink_resources[resource]
+            data.resources[resource] -= data.MENU[drink]["ingredients"][resource]
     return
 
 
