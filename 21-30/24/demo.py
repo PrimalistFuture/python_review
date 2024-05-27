@@ -40,4 +40,7 @@ with open("21-30/24/data.txt") as data:
         with open("21-30/24/data.txt", mode="w") as data:
             data.write(f"{player_high_score}")
 
-# absolute vs relative path
+
+#  readlines() puts the data into an array
+with open("21-30/25/weather_data.csv", mode="r") as weather_data:
+    print(weather_data.readlines())
