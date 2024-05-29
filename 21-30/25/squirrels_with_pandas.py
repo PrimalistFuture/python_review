@@ -49,4 +49,4 @@ black_squirrels = s_data[data["Primary Fur Color"] == "Black"]
 # getting the count of these
 gray_squirrels_amount = len(gray_squirrels)
 
-# Then repeat the creating dict and creating data frame steps
+# Then repeat the creating dict and creating data frame and creating csv steps
