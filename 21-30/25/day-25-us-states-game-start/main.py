@@ -50,6 +50,10 @@ def create_missed_states_csv(answered_state_list):
         if state not in answered_state_list:
             missed_states.append(state)
 
+    # The above could be a comprehension
+    # missed_states_comprehension = [
+    #     state for state in all_states if state not in answered_state_list]
+
     missed_states = {
         "state": missed_states
     }
