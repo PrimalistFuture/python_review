@@ -89,7 +89,7 @@ def send_email_with_letter(recipient_email, birthday_letter):
 def conduct_birthday_emails():
     """Conducts the birthday email app"""
     birthday_target = check_for_birthday()
-    if birthday_target:
+    if birthday_target:  # this isn't doing what I want it to be doing rn
         starting_letter = get_random_letter()
         personalized_letter = replace_name_in_letter(
             starting_letter,
